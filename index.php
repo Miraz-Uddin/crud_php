@@ -14,9 +14,9 @@
     <title></title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-sm-12 mt-5 mx-auto">
+            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-10 mt-5 mx-auto">
                 <div class="card shadow">
                     <div class="card-header">
                       <h2 class="text-center px-4">All Data

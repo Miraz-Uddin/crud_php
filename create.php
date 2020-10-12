@@ -16,26 +16,57 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mt-5 mx-auto">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-7 mt-5 mx-auto">
           <div class="card shadow">
             <div class="card-header">
               <h2 class="text-center">Add New Data</h2>
             </div>
             <div class="card-body px-5 py-4">
               <form action="store.php" method="post" enctype="multipart/form-data">
+                <?php if(isset($_GET['empty_error'])){?>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php echo $_GET['empty_error'];?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <?php }?>
+                <?php if(isset($_GET['success'])){?>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?php echo $_GET['success'];?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <?php }?>
                 <div class="form-group mb-2">
                   <label for="add_name">Name</label>
                   <input class="form-control" type="text" id="add_name" name="name" placeholder="Enter Your Full Name">
+                  <?php if(isset($_GET['name_error'])){?>
+                    <small class="text-danger">
+                      <?php echo $_GET['name_error']; ?>
+                    </small>
+                  <?php } ?>
                 </div>
                 <div class="form-group mb-2">
                   <label for="add_email">Email</label>
                   <input class="form-control" type="text" id="add_email" name="email" placeholder="Give a Valid Email ID">
+                  <?php if(isset($_GET['email_error'])){?>
+                    <small class="text-danger">
+                      <?php echo $_GET['email_error']; ?>
+                    </small>
+                  <?php } ?>
                 </div>
                 <div class="form-group mb-2">
                   <div class="row">
                     <div class="col-md-7">
                       <label for="add_cell">Cell</label>
                       <input class="form-control" type="text" id="add_cell" name="cell" placeholder="Mobile No.">
+                      <?php if(isset($_GET['cell_error'])){?>
+                        <small class="text-danger">
+                          <?php echo $_GET['cell_error']; ?>
+                        </small>
+                      <?php } ?>
                     </div>
                     <div class="col-md-5">
                       <label for="add_location">Location</label>
@@ -61,13 +92,23 @@
                         <option value="Shyamoli">Shyamoli</option>
                         <option value="Uttara">Uttara</option>
                       </select>
+                      <?php if(isset($_GET['location_error'])){?>
+                        <small class="text-danger">
+                          <?php echo $_GET['location_error']; ?>
+                        </small>
+                      <?php } ?>
                     </div>
                   </div>
                 </div>
-                <div><label for="add_photo">Photo</label></div>
+                <div><label for="add_photo">Photo <span class="text-info"></span> </label></div>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="add_photo">
+                  <input type="file" class="custom-file-input" id="add_photo" name="photo">
                   <label class="custom-file-label" for="add_photo">Choose a Photo ...</label>
+                  <?php if(isset($_GET['photo_error'])){?>
+                    <small class="text-danger">
+                      <?php echo $_GET['photo_error']; ?>
+                    </small>
+                  <?php } ?>
                 </div>
                 <div class="form-group">
                   <div class="row no-gutters">
@@ -109,18 +150,27 @@
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-5 ">
-                      <label class="mt-2" for="add_status">Status</label>
+                      <label class="mt-2" for="add_status">Status <span class="text-info">(Optional)</span> </label>
                       <select id="add_status" name="status" class="custom-select">
                         <option value="ACTIVE">ACTIVE</option>
                         <option value="INACTIVE">INACTIVE</option>
                       </select>
                     </div>
                   </div>
+                  <?php if(isset($_GET['gender_error'])){?>
+                    <small class="text-danger">
+                      <?php echo $_GET['gender_error']; ?>
+                    </small>
+                  <?php } ?>
                 </div>
-
                 <div class="form-group mb-2">
                   <label for="add_age">Birthdate</label>
                   <input class="form-control" type="date" id="add_age" name="age">
+                  <?php if(isset($_GET['age_error'])){?>
+                    <small class="text-danger">
+                      <?php echo $_GET['age_error']; ?>
+                    </small>
+                  <?php } ?>
                 </div>
                 <div class="form-group mt-4">
                   <div class="row">
