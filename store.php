@@ -10,7 +10,7 @@ if(isset($_POST['add'])){
   $name_exception = preg_match('/[\d\[\]\/\'`^£$%&*()};"!:{@#~?><>,|=_+¬-]/', $name);
   $name_back_slash_check = preg_match('/\\\\/', $name);
 
-  // e-mail Managemnet
+  // e-mail Management
   $email = strtolower($_POST['email']);
   $email_validity = filter_var($email,FILTER_VALIDATE_EMAIL);
   $email_piece = explode('@',$email_validity);
@@ -153,8 +153,10 @@ if(isset($_POST['add'])){
 
 
   /**
-   *
    *  ----------Location DATA Validation----------
+   *
+   *  It won't accept
+   *      => 'Empty Field'
    *
    */
   elseif(empty($location)){
@@ -164,8 +166,10 @@ if(isset($_POST['add'])){
 
 
   /**
-   *
    *  ----------Gender DATA Validation----------
+   *
+   *  It won't accept
+   *      => 'Empty Field'
    *
    */
   elseif(empty($gender)){
@@ -189,7 +193,7 @@ if(isset($_POST['add'])){
     *
     *  It will only accept People Who are
     *      => Adult means 18+
-    *  It won't accept People Whoe Are
+    *  It won't accept People Who Are
     *      => Below 18
     *      => More Than 80 years Old
     *

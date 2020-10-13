@@ -1,3 +1,10 @@
+<?php
+
+include_once "app/db.php";
+include_once "app/functions.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -16,7 +23,7 @@
   <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-10 mt-5 mx-auto">
+            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 mt-5 mx-auto">
                 <div class="card shadow">
                     <div class="card-header">
                       <h2 class="text-center px-4">All Data
@@ -28,34 +35,57 @@
                     <div class="card-body px-5">
                         <table class="table table-striped">
                           <thead class="thead-dark">
-                            <tr class="d-flex">
-                              <th class="col-1">#</th>
-                              <th class="col-2">Name</th>
-                              <th class="col-3">Email</th>
-                              <th class="col-2">Cell</th>
-                              <th class="col-1">Status</th>
-                              <th class="col-1 text-center">Photo</th>
-                              <th class="col-2 text-center">Action</th>
+                            <tr>
+                              <th>#</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Cell</th>
+                              <th>Location</th>
+                              <th>Gender</th>
+                              <th>Age</th>
+                              <th>Created_at</th>
+                              <!-- <th>Photo</th> -->
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr class="d-flex">
-                              <td class="col-1">1</td>
-                              <td class="col-2">Name</td>
-                              <td class="col-3">Email</td>
-                              <td class="col-2">Cell</td>
-                              <td class="col-1">Status</td>
-                              <td class="col-1">
-                                  <img class="img-fluid" src="assets/media/img/tom.jpeg" alt="">
+                            <?php
+                            // Run SQL Query
+                            $sql = "SELECT * FROM students";
+
+                            // Fetch DATA with PDO-Prepare
+                            $stmt = $conn->prepare($sql);
+                            $stmt->execute();
+                            $students = $stmt->fetchAll();
+
+                            // Running For-each Loop to Print All DATA
+                            foreach($students as $student):
+                            ?>
+                            <tr>
+                              <td><?=$student['id']?></td>
+                              <td>
+                                <p><img class="rounded-circle" src="assets/uploads/img/students/<?=$student['photo']?>" style="width:14%;">
+                                <?=$student['name']?></p>
                               </td>
-                              <td class="col-2">
-                                  <div class="btn-group btn-group-sm" role="group">
+                              <td><?=$student['email']?></td>
+                              <td><?=$student['cell']?></td>
+                              <td><?=$student['location']?></td>
+                              <td><?=$student['gender']?></td>
+                              <td><?=$student['age']?></td>
+                              <td>
+                                <?php
+                                $time = $student['created_at'];
+                                echo date('d/m/Y G:i:s',$time);
+                                ?></td>
+                              <td>
+                                  <p role="group" class="btn-group btn-group-sm">
                                       <a id="view_info" class="btn btn-info btn-sm">View</a>
                                       <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                       <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                  </div>
+                                  </p>
                               </td>
                             </tr>
+                          <?php endforeach; ?>
                           </tbody>
                         </table>
                     </div>
