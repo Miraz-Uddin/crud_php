@@ -101,7 +101,7 @@ include_once "app/functions.php";
                                 ?></td>
                               <td>
                                   <p role="group" class="btn-group btn-group-sm">
-                                      <a id="view_info" class="btn btn-info btn-sm">View</a>
+                                      <a id="view_info" data_id="<?=$student['id']?>" class="btn btn-info btn-sm">View</a>
                                       <a href="#" class="btn btn-danger btn-sm">Delete</a>
                                       <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                   </p>
@@ -126,25 +126,40 @@ include_once "app/functions.php";
                 <div class="modal-body">
                     <table class="table border-0">
                         <tr class="d-flex">
-                            <td class="col-3 border-0">
-                                <img class="w-100 d-block m-auto" src="assets/media/img/tom.jpeg">
+                            <td class="col-5 border-0">
+                                <img id="show_data_modal_photo" class="w-100 d-block m-auto" src="">
                             </td>
-                            <td class="col-9 border-0">
+                            <td class="col-7 border-0">
                                 <table class="table border-0">
-                                    <tr class="d-flex">
-                                        <th class="col-3 border-0">ID</th>
-                                        <th class="col-1 border-0">:</th>
-                                        <td class="col-8 border-0">3</td>
-                                    </tr>
                                     <tr class="d-flex">
                                         <th class="col-3 border-0">Name</th>
                                         <th class="col-1 border-0">:</th>
-                                        <td class="col-8 border-0">Tom Candy</td>
+                                        <td id="show_data_modal_name" class="col-8 border-0"></td>
                                     </tr>
                                     <tr class="d-flex">
                                         <th class="col-3 border-0">E - Mail</th>
                                         <th class="col-1 border-0">:</th>
-                                        <td class="col-8 border-0">candy.tom@gmail.com</td>
+                                        <td id="show_data_modal_email" class="col-8 border-0"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-3 border-0">Contact</th>
+                                        <th class="col-1 border-0">:</th>
+                                        <td id="show_data_modal_cell" class="col-8 border-0"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-3 border-0">Location</th>
+                                        <th class="col-1 border-0">:</th>
+                                        <td id="show_data_modal_location" class="col-8 border-0"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-3 border-0">Gender</th>
+                                        <th class="col-1 border-0">:</th>
+                                        <td id="show_data_modal_gender" class="col-8 border-0"></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-3 border-0">Age</th>
+                                        <th class="col-1 border-0">:</th>
+                                        <td id="show_data_modal_age" class="col-8 border-0"></td>
                                     </tr>
                                 </table>
                             </td>
