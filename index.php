@@ -25,12 +25,27 @@ include_once "app/functions.php";
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 mt-5 mx-auto">
                 <div class="card shadow">
-                    <div class="card-header">
-                      <h2 class="text-center px-4">All Data
-                        <a href="create.php" class="float-right btn btn-success btn-sm mt-1 mr-1 rounded px-3 py-2">ADD NEW
-                          <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        </a>
-                      </h2>
+                    <div class="card-header px-5">
+                      <div class="row">
+                        <div class="col-sm-3 col-md-3">
+                          <a href="create.php" class="float-left btn btn-success mt-1 mr-1 rounded px-3 py-2">
+                            ADD NEW
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                          </a>
+                        </div>
+                        <div class="col-sm-5 col-md-5">
+                          <h2 class="text-center clearfix">
+                            All Data
+                          </h2>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                          <form class="searchbox" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+                            <input type="search" placeholder="Name/Location/Gender/Email" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+                            <input type="submit" class="searchbox-submit" value="Search" name="submit">
+                            <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                     <div class="card-body px-5">
                         <table class="table table-striped">
@@ -44,14 +59,20 @@ include_once "app/functions.php";
                               <th>Gender</th>
                               <th>Age</th>
                               <th>Created_at</th>
-                              <!-- <th>Photo</th> -->
                               <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             <?php
+
+                            // Get Values From Search
+                            $serach = '';
+                            if(isset($_POST['submit'])){
+                              $serach = $_POST['search'];
+                            }
+
                             // Run SQL Query
-                            $sql = "SELECT * FROM students";
+                            $sql = "SELECT * FROM students WHERE location='$serach' OR gender='$serach' OR name LIKE '%$serach%'";
 
                             // Fetch DATA with PDO-Prepare
                             $stmt = $conn->prepare($sql);
@@ -59,10 +80,11 @@ include_once "app/functions.php";
                             $students = $stmt->fetchAll();
 
                             // Running For-each Loop to Print All DATA
+                            $i=0;
                             foreach($students as $student):
                             ?>
                             <tr>
-                              <td><?=$student['id']?></td>
+                              <td><?=++$i?></td>
                               <td>
                                 <p><img class="rounded-circle" src="assets/uploads/img/students/<?=$student['photo']?>" style="width:14%;">
                                 <?=$student['name']?></p>
