@@ -3,31 +3,7 @@
     $(document).ready(function(){
 
         // View All Students Info
-        function view_all_Students(){
-          $.ajax({
-            url: 'allData.php',
-            method: 'POST',
-            success:function(data){
-              let sql = data;
-              getALLDATAS(sql);
-            }
-          });
-        }
         view_all_Students();
-
-        // Get All Data By Query
-        function getALLDATAS(sql){
-          $.ajax({
-            url: 'showAll.php',
-            method: 'GET',
-            data: {sql:sql} ,
-            success:function(data){
-              $('#all_students_information').html(data);
-            }
-          });
-        }
-
-
 
         //  All Data Show
         $(document).on('click','#show_all_datas',function(e){
@@ -96,12 +72,11 @@
                 method:'POST',
                 data:{id:id},
                 success:function(data){
-                  // console.log(data);
+                  $('#delete_message').html(data);
                 }
               });
             }
             view_all_Students();
-
         });
 
 
@@ -149,7 +124,7 @@
         }
     }
 
-    //  Age Calculator
+    //  Age Calculator Function
     function getAge(dateString) {
         var dates = dateString.split("-");
         var d = new Date();
@@ -165,5 +140,29 @@
         }
 
         return age;
+    }
+
+    // View All Datas Function
+    function view_all_Students(){
+      $.ajax({
+        url: 'allData.php',
+        method: 'POST',
+        success:function(data){
+          let sql = data;
+          getALLDATAS(sql);
+        }
+      });
+    }
+
+    // Get All Data By Passing Query
+    function getALLDATAS(sql){
+      $.ajax({
+        url: 'showAll.php',
+        method: 'GET',
+        data: {sql:sql} ,
+        success:function(data){
+          $('#all_students_information').html(data);
+        }
+      });
     }
 })(jQuery)

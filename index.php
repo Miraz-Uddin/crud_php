@@ -33,7 +33,6 @@ include_once "app/functions.php";
                           </a>
                           <a href="javascript:void(0)" id="show_all_datas" class="float-left btn btn-primary mt-1 ml-4 rounded px-3 py-2">
                             Show All
-                            <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> -->
                           </a>
 
                         </div>
@@ -75,6 +74,7 @@ include_once "app/functions.php";
                               <th class="col-1 align-self-center border-0 text-center">Actions</th>
                             </tr>
                           </thead>
+                          <div id="delete_message"></div>
                           <tbody id="all_students_information">
 
                           </tbody>
