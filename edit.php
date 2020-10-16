@@ -39,7 +39,15 @@ include_once "app/functions.php";
                     $student = $stmt->fetch(PDO::FETCH_ASSOC);
                     ?>
                     <div class="card-body px-5 py-4">
-                      <form action="store.php" method="post" enctype="multipart/form-data">
+                      <?php if(isset($_GET['success'])){ ?>
+                        <p class="alert alert-success text-center alert-dismissible fade show" role="alert">
+                          <strong><?=$_GET['success']?></strong>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </p>
+                      <?php } ?>
+                      <form action="update.php?id=<?=$student['id']?>" method="post" enctype="multipart/form-data">
                         <div class="form-group mb-2">
                           <label for="add_name">Name</label>
                           <input class="form-control" type="text" id="add_name" name="name" value="<?=$student['name']?>">
@@ -106,8 +114,9 @@ include_once "app/functions.php";
                             <img class="img-fluid w-50 d-block m-auto" src="assets/uploads/img/students/<?=$student['photo']?>">
                         </div>
                         <div class="custom-file">
+                          <input type="hidden" name="old_photo" value="<?=$student['photo']?>">
                           <input type="file" class="custom-file-input" id="add_photo" name="photo">
-                          <label class="custom-file-label" for="add_photo">Choose a Photo ...</label>
+                          <label class="custom-file-label" for="add_photo">Click to Change Existing Photo</label>
                           <?php if(isset($_GET['photo_error'])){?>
                             <small class="text-danger">
                               <?php echo $_GET['photo_error']; ?>
@@ -124,7 +133,7 @@ include_once "app/functions.php";
                                     <div class="input-group">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                          <input type="radio" id="female" name="gender" value="female" <?=(($student['gender']=='female')?'checked':'')?>>
+                                          <input type="radio" id="female" name="gender" value="FEMALE" <?=(($student['gender']=='FEMALE')?'checked':'')?>>
                                         </div>
                                       </div>
                                       <label for="female" class="mb-0">
@@ -140,7 +149,7 @@ include_once "app/functions.php";
                                     <div class="input-group">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                          <input type="radio" id="male" name="gender" value="male" <?=(($student['gender']=='male')?'checked':'')?>>
+                                          <input type="radio" id="male" name="gender" value="MALE" <?=(($student['gender']=='MALE')?'checked':'')?>>
                                         </div>
                                       </div>
                                       <label for="male" class="mb-0">
@@ -170,7 +179,7 @@ include_once "app/functions.php";
                         <div class="form-group mb-2">
                           <label for="add_age">Birthdate</label>
                           <?php
-                             $date = $student['age'];
+                             $date = strtotime($student['age']);
                              date_default_timezone_set('Asia/Dhaka');
                              $birth_day = date('Y-m-d', $date);
                           ?>
@@ -184,7 +193,7 @@ include_once "app/functions.php";
                         <div class="form-group mt-4">
                           <div class="row">
                             <div class="col-md-6">
-                              <button class="form-control btn btn-success" type="submit" name="add">ADD</button>
+                              <button class="form-control btn btn-success" type="submit" name="update">Save changes</button>
                             </div>
                             <div class="col-md-6">
                               <a href="index.php" class="form-control btn btn-outline-dark">Cancel</a>

@@ -112,7 +112,13 @@
         });
     });
 
-    // Serach box Function
+    /**
+     *****************************************************
+     *	 All Custom Functions
+     ******************************************************
+     */	
+     
+    // Search box Function
     function buttonUp(){
         var inputVal = $('.searchbox-input').val();
         inputVal = $.trim(inputVal).length;

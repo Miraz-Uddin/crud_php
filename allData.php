@@ -5,4 +5,4 @@ include_once "app/functions.php";
 
 
 // Run SQL Query
-echo $sql = "SELECT * FROM students ORDER BY id DESC";
+echo $sql = "SELECT * FROM students ORDER BY id ASC";
