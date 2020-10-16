@@ -120,7 +120,7 @@
                             <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                  <input type="radio" id="female" name="gender" value="female">
+                                  <input type="radio" id="female" name="gender" value="FEMALE">
                                 </div>
                               </div>
                               <label for="female" class="mb-0">
@@ -136,7 +136,7 @@
                             <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                  <input type="radio" id="male" name="gender" value="male">
+                                  <input type="radio" id="male" name="gender" value="MALE">
                                 </div>
                               </div>
                               <label for="male" class="mb-0">

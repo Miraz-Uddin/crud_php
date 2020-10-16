@@ -2,7 +2,6 @@
 
 include_once "app/db.php";
 include_once "app/functions.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -23,15 +22,20 @@ include_once "app/functions.php";
   <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 mt-5 mx-auto">
+            <div class="col-12 mt-5 mx-auto">
                 <div class="card shadow">
-                    <div class="card-header px-5">
+                    <div class="card-header">
                       <div class="row">
-                        <div class="col-sm-3 col-md-3">
+                        <div class="col-sm-3 col-md-3 clearfix">
                           <a href="create.php" class="float-left btn btn-success mt-1 mr-1 rounded px-3 py-2">
                             ADD NEW
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                           </a>
+                          <a href="javascript:void(0)" id="show_all_datas" class="float-left btn btn-primary mt-1 ml-4 rounded px-3 py-2">
+                            Show All
+                            <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> -->
+                          </a>
+
                         </div>
                         <div class="col-sm-5 col-md-5">
                           <h2 class="text-center clearfix">
@@ -39,75 +43,40 @@ include_once "app/functions.php";
                           </h2>
                         </div>
                         <div class="col-sm-4 col-md-4">
-                          <form class="searchbox" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
-                            <input type="search" placeholder="Name/Location/Gender/Email" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
+                          <form id="search_form" class="searchbox">
+                            <input id="search_field" type="search" placeholder="Name/Location/Gender/Email" name="search" class="searchbox-input" onkeyup="buttonUp();" required>
                             <input type="submit" class="searchbox-submit" value="Search" name="submit">
                             <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
                           </form>
                         </div>
                       </div>
                     </div>
-                    <div class="card-body px-5">
+                    <div class="card-body">
                         <table class="table table-striped">
                           <thead class="thead-dark">
-                            <tr>
-                              <th>#</th>
-                              <th>Name</th>
-                              <th>Email</th>
-                              <th>Cell</th>
-                              <th>Location</th>
-                              <th>Gender</th>
-                              <th>Age</th>
-                              <th>Created_at</th>
-                              <th>Action</th>
+                            <tr class="d-flex">
+                              <th class="col-2 align-self-center border-0">
+                                <div class="d-flex">
+                                  <div class="col-3 text-right">
+                                    #
+                                  </div>
+                                  <div class="col-9 text-center">
+                                    Name
+                                  </div>
+                                </div>
+                              </th>
+                              <th class="col-2 align-self-center border-0">E-Mail Address</th>
+                              <th class="col-1 align-self-center border-0 text-center">Contact</th>
+                              <th class="col-1 align-self-center border-0 text-center">Location</th>
+                              <th class="col-1 align-self-center border-0 text-center">Gender</th>
+                              <th class="col-2 align-self-center border-0 text-center">Birth Date</th>
+                              <th class="col-1 align-self-center border-0 text-center">Status</th>
+                              <th class="col-1 align-self-center border-0 text-center">Photo</th>
+                              <th class="col-1 align-self-center border-0 text-center">Actions</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <?php
+                          <tbody id="all_students_information">
 
-                            // Get Values From Search
-                            $serach = '';
-                            if(isset($_POST['submit'])){
-                              $serach = $_POST['search'];
-                            }
-
-                            // Run SQL Query
-                            $sql = "SELECT * FROM students WHERE location='$serach' OR gender='$serach' OR name LIKE '%$serach%'";
-
-                            // Fetch DATA with PDO-Prepare
-                            $stmt = $conn->prepare($sql);
-                            $stmt->execute();
-                            $students = $stmt->fetchAll();
-
-                            // Running For-each Loop to Print All DATA
-                            $i=0;
-                            foreach($students as $student):
-                            ?>
-                            <tr>
-                              <td><?=++$i?></td>
-                              <td>
-                                <p><img class="rounded-circle" src="assets/uploads/img/students/<?=$student['photo']?>" style="width:14%;">
-                                <?=$student['name']?></p>
-                              </td>
-                              <td><?=$student['email']?></td>
-                              <td><?=$student['cell']?></td>
-                              <td><?=$student['location']?></td>
-                              <td><?=$student['gender']?></td>
-                              <td><?=$student['age']?></td>
-                              <td>
-                                <?php
-                                $time = $student['created_at'];
-                                echo date('d/m/Y G:i:s',$time);
-                                ?></td>
-                              <td>
-                                  <p role="group" class="btn-group btn-group-sm">
-                                      <a id="view_info" data_id="<?=$student['id']?>" class="btn btn-info btn-sm">View</a>
-                                      <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                      <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                  </p>
-                              </td>
-                            </tr>
-                          <?php endforeach; ?>
                           </tbody>
                         </table>
                     </div>

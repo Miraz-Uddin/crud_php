@@ -40,7 +40,7 @@ if(isset($_POST['add'])){
 
   // age Management
   if(empty($_POST['age'])){
-    $age = 0;
+    $age = '';
   }
   else{
     $age = $_POST['age'];
@@ -217,7 +217,7 @@ if(isset($_POST['add'])){
     $data_cell = $cell;
     $data_location = $location;
     $data_gender = $gender;
-    $data_age = $age;
+    $data_age = $_POST['age'];
     $data_status = $status;
 
     // $file_upload_status =fileUpload($_FILES['photo'],'assets/uploads/file/students/',['docx','pdf'],[
